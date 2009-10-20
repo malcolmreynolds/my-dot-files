@@ -1,1 +1,37 @@
-../.sbclrc
+;; #-:asdf (load "/Users/malc/opt/lisp/sbcl/sbcl-cur/lib/sbcl/asdf/asdf")
+;; #-:asdf-install (load
+
+
+(require :asdf)
+
+
+
+(pushnew "/Users/malc/opt/lisp/asdf-registry/"
+         asdf:*central-registry* :test #'equal)
+
+(require :asdf-install)
+;;(require :gsll)
+;;(require :cl-heap)
+;;(require :cl-store)
+(require :sb-sprof)
+
+
+;start swank
+;(swank:create-server :dont-close t)
+
+
+(defun load-cngh ()
+  (asdf:operate 'asdf:load-op :cngh))
+
+(defun load-cngh-tests ()
+  (asdf:operate 'asdf:load-op :cngh-test))
+
+(asdf:operate 'asdf:load-op :cffi)
+;;(require :cffi)
+(pushnew #P"/opt/local/lib/" cffi:*foreign-library-directories*
+	 :test #'equal)
+
+(defun l (name)
+  (asdf:operate 'asdf:load-op name))
+
+  
